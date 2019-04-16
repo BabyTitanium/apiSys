@@ -8,4 +8,5 @@ import java.util.Map;
 public interface UserService {
     Map getUserByName(String username);
 
+    Map login(Map<String, String> loginParam);
 }

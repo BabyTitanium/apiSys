@@ -9,4 +9,6 @@ import java.util.Map;
 @Repository
 public interface UserMapper {
      Map selectUserByName(String username);
+
+     Map login(Map<String, String> loginParam);
 }
