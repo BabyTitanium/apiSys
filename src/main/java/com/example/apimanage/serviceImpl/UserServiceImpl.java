@@ -16,4 +16,10 @@ public class UserServiceImpl implements UserService {
 
         return userMapper.selectUserByName(username);
     }
+
+    @Override
+    public Map login(Map<String, String> loginParam){
+
+        return userMapper.login(loginParam);
+    }
 }
