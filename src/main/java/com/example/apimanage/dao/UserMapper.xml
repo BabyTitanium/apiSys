@@ -6,6 +6,6 @@
     </select>
 
     <select id="login"  resultType="java.util.Map" parameterType="java.util.Map">
-        SELECT * FROM user WHERE email = #{email} AND password = #{password}
+        SELECT * FROM user WHERE username = #{username} AND password = #{password}
     </select>
 </mapper>
