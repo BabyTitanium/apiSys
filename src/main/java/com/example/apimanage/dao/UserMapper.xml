@@ -5,7 +5,20 @@
         SELECT * FROM user WHERE username = #{username}
     </select>
 
-    <select id="login"  resultType="java.util.Map" parameterType="java.util.Map">
-        SELECT * FROM user WHERE username = #{username} AND password = #{password}
+    <select id="login" resultType="java.util.Map">
+        SELECT * FROM user WHERE email = #{email} AND password = #{password}
     </select>
+
+    <insert id="register" useGeneratedKeys="true" keyProperty="id" parameterType="com.example.apimanage.domain.query.Register">
+        INSERT INTO user (nickname,email,password) values(#{nickname},#{email},#{password})
+    </insert>
+
+    <update id="modify" useGeneratedKeys="true" keyProperty="id" parameterType="java.util.Map">
+        UPDATE user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="nickname!=null">nickname = #{nickname},</if>
+            <if test="password!=null">password = #{password}</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
 </mapper>

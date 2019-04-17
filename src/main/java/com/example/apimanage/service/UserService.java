@@ -1,6 +1,6 @@
 package com.example.apimanage.service;
 
-import org.springframework.stereotype.Service;
+import com.example.apimanage.domain.query.Register;
 
 import java.util.Map;
 
@@ -8,5 +8,9 @@ import java.util.Map;
 public interface UserService {
     Map getUserByName(String username);
 
-    Map login(Map<String, String> loginParam);
+    Map login(String email, String password);
+
+    int register(Register register);
+
+    int modify(Map<String, Object> user);
 }
