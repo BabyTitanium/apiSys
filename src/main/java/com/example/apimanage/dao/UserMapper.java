@@ -11,7 +11,7 @@ import java.util.Map;
 @Mapper
 @Repository
 public interface UserMapper {
-     Map selectUserByName(String username);
+     User selectUserById(int userId);
 
      Map login(@Param("email") String email, @Param("password") String password);
 

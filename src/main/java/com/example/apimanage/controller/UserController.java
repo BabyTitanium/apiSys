@@ -1,17 +1,17 @@
 package com.example.apimanage.controller;
 
-import com.example.apimanage.ResultDetail.Result;
 import com.example.apimanage.domain.dto.User;
+import com.example.apimanage.utils.Result;
 import com.example.apimanage.domain.query.Login;
 import com.example.apimanage.domain.query.Register;
 import com.example.apimanage.service.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -27,6 +27,23 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST)
+    @ApiOperation(value = "获取用户信息",response = String.class)
+    public Map<String, Object> getUserInfo(@RequestBody int id){
+        System.out.println(id);
+//        if(userId != null) {
+            try{
+                User result = userService.getUserInfoById(id);
+                if(result!=null){
+                    return Result.successResult(result);
+                }else{
+                    return Result.errorResult("获取失败");
+                }
+            }catch (Exception e){
+                return Result.errorResult(e.getMessage());
+            }
+//        }
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录",response = String.class)
