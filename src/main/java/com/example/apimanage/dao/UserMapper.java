@@ -1,11 +1,13 @@
 package com.example.apimanage.dao;
 
 import com.example.apimanage.domain.dto.User;
+import com.example.apimanage.domain.query.ListUser;
 import com.example.apimanage.domain.query.Register;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,4 +29,7 @@ public interface UserMapper {
      int register(Register register);
 
      int modify(Map<String, Object> user);
+
+     List<ListUser> getUserList();
+
 }

@@ -1,6 +1,7 @@
 package com.example.apimanage.controller;
 
 import com.example.apimanage.domain.dto.User;
+import com.example.apimanage.domain.query.ListUser;
 import com.example.apimanage.utils.Result;
 import com.example.apimanage.domain.query.Login;
 import com.example.apimanage.domain.query.Register;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 
@@ -26,7 +28,6 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
-
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST)
     @ApiOperation(value = "获取用户信息",response = String.class)
     public Map<String, Object> getUserInfo(@RequestBody int id){
@@ -44,7 +45,6 @@ public class UserController {
             }
 //        }
     }
-
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ApiOperation(value = "登录",response = String.class)
     public Map<String, Object> login(@RequestBody @Valid Login loginParam){
@@ -61,7 +61,6 @@ public class UserController {
         }
 
     }
-
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ApiOperation(value = "注册",response = String.class)
     public Map<String, Object> register(@RequestBody @Valid Register register){
@@ -77,7 +76,6 @@ public class UserController {
             return Result.errorResult(e.getMessage());
         }
     }
-
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     @ApiOperation(value = "更新个人信息",response = String.class)
     public Map<String, Object> modify(@RequestBody Map<String, Object> user){
@@ -96,4 +94,16 @@ public class UserController {
             return Result.errorResult("参数错误");
         }
     }
+    @RequestMapping(value = "getUserList",method = RequestMethod.GET)
+    @ApiOperation(value = "获取用户列表",response =String.class)
+    public Map<String,Object> getUserList(){
+        try{
+            List<ListUser> list=userService.getUserList();
+            return Result.successResult(list);
+        }catch (Exception e){
+            return Result.errorResult("服务器错误");
+        }
+    }
+
+
 }

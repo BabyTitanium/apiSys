@@ -1,8 +1,10 @@
 package com.example.apimanage.service;
 
 import com.example.apimanage.domain.dto.User;
+import com.example.apimanage.domain.query.ListUser;
 import com.example.apimanage.domain.query.Register;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -14,4 +16,6 @@ public interface UserService {
     int register(Register register);
 
     int modify(Map<String, Object> user);
+
+    List<ListUser> getUserList();
 }

@@ -25,7 +25,6 @@ public class Result {
         map.put("status","error");
         map.put("message",message);
         map.put("data","");
-
         return map;
 
     }
@@ -37,4 +36,5 @@ public class Result {
         map.put("data", t);
         return map;
     }
+
 }
