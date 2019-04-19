@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8089
 spring:
   datasource:
     url: jdbc:mysql://106.14.180.252:3306/apisys?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
