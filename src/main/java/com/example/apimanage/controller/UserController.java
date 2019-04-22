@@ -2,13 +2,12 @@ package com.example.apimanage.controller;
 
 import com.example.apimanage.domain.dto.User;
 import com.example.apimanage.domain.query.ListUser;
-import com.example.apimanage.redis.RedisUtil;
+import com.example.apimanage.redis.RedisJedisUtil;
 import com.example.apimanage.utils.Result;
 import com.example.apimanage.domain.query.Login;
 import com.example.apimanage.domain.query.Register;
 import com.example.apimanage.service.UserService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +28,6 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private UserService userService;
-    @Autowired
-    private RedisUtil redisUtil;
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.POST)
     @ApiOperation(value = "获取用户信息",response = String.class)
     public Map<String, Object> getUserInfo(@RequestBody int id){
@@ -101,44 +98,8 @@ public class UserController {
     @ApiOperation(value = "获取用户列表",response =String.class)
     public Map<String,Object> getUserList(){
         try{
-
-//            boolean isExist=redisUtil.exists("list");
-//            if(isExist){
-//                Map list=redisUtil.hmget("list");
-//                System.out.println(list);
-//                return Result.successResult(list);
-//            }else{
                 List<ListUser> list=userService.getUserList();
-//                boolean success=redisUtil.set("list",list);
-//                if(success){
-//                    System.out.println("缓存成功");
-//                }
                 return Result.successResult(list);
-//            }
-
-        }catch (Exception e){
-            return Result.errorResult("服务器错误");
-        }
-    }
-    @RequestMapping(value = "setUserList1",method = RequestMethod.GET)
-    @ApiOperation(value = "获取用户列表1",response =String.class)
-    public Map<String,Object> setUserList1(){
-        try{
-            System.out.println(redisUtil);
-            boolean isExist=redisUtil.exists("string");
-            if(isExist){
-                String list=redisUtil.get("string",0);
-                
-                System.out.println(list);
-                return Result.successResult(list);
-            }else{
-                String s="我是字符串";
-                String success=redisUtil.set("string",s,0);
-                if(success=="OK"){
-                    System.out.println("缓存成功");
-                }
-            return Result.successResult(s);
-            }
         }catch (Exception e){
             return Result.errorResult("服务器错误");
         }

@@ -3,8 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="js/jquery-2.2.4.min.js"></script>
 </head>
 <body>
-    awesome houserqu
+<p id="userlist">
+
+</p>
 </body>
+<script>
+    $(function(){
+        getUserList();
+    });
+    function getUserList(){
+        $.ajax({
+            url:'getUserList',
+            dataType:'json',
+            type:'GET',
+            async:false,
+            contextType:'application/json',
+            success:function (data) {
+                console.log(data);
+                $("#userlist").html(data);
+            }
+        })
+    }
+
+
+</script>
 </html>
