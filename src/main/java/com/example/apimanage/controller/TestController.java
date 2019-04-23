@@ -69,7 +69,8 @@ public class TestController {
     @ApiOperation(value = "获取用户列表1",response =String.class)
     public String getUserList2(){
         try{
-          //  List<ListUser> listUsers=redisTemplateUtil.get("userList2");
+            List<Object> listUsers= redisTemplateUtil.lGet("userList2",0,-1);
+            System.out.println(listUsers);
             return "bbb";
 
         }catch (Exception e){

@@ -41,6 +41,7 @@ public class RedisTemplateConfig {
     @Bean
     public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory factory) {
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
+
         stringRedisTemplate.setConnectionFactory(factory);
         return stringRedisTemplate;
     }
