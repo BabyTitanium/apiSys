@@ -137,12 +137,7 @@ public class Sort {
         quickSort1(arr,i,left-1);
         quickSort1(arr,left+1,j);
     }
-
     //堆排序
     public void heap(int[] arr) {
     }
-
-
-
-
 }
