@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -21,7 +22,6 @@ public class TestController {
     private RedisJedisUtil redisUtil;
     @Autowired
     private UserService userService;
-
     @Autowired
     private RedisTemplateUtil redisTemplateUtil;
     @RequestMapping(value = "setUserList1",method = RequestMethod.GET)
@@ -29,7 +29,7 @@ public class TestController {
     public String setUserList1(){
         try{
             List<ListUser> listUsers=userService.getUserList();
-            redisUtil.set("userList".getBytes(),SerializeUtil.serialize(listUsers),0);
+            redisUtil.set("userList1".getBytes(),SerializeUtil.serialize(listUsers),0);
             return "bbb";
 
         }catch (Exception e){
@@ -38,18 +38,18 @@ public class TestController {
     }
     @RequestMapping(value = "getUserList1",method = RequestMethod.GET)
     @ApiOperation(value = "获取用户列表1",response =String.class)
-    public String getUserList1(){
+    public List getUserList1(){
         try{
-           List<ListUser> listUsers=(List<ListUser>) SerializeUtil.unserizlize(redisUtil.get("userList".getBytes(),0));
+           List<ListUser> listUsers=(List<ListUser>) SerializeUtil.unserizlize(redisUtil.get("userList1".getBytes(),0));
             for (ListUser u :
                     listUsers) {
                 System.out.println(u.getNickname());
 
             }
-            return "bbb";
+            return listUsers;
 
         }catch (Exception e){
-            return "aaa";
+            return null;
         }
     }
 
@@ -58,23 +58,21 @@ public class TestController {
     public String setUserList2(){
         try{
             List<ListUser> listUsers=userService.getUserList();
-            redisTemplateUtil.lSet("userList2",listUsers);
+            redisTemplateUtil.set("userList2",listUsers);
             return "bbb";
-
         }catch (Exception e){
             return "aaa";
         }
     }
     @RequestMapping(value = "getUserList2",method = RequestMethod.GET)
     @ApiOperation(value = "获取用户列表1",response =String.class)
-    public String getUserList2(){
+    public Object getUserList2(){
         try{
-            List<Object> listUsers= redisTemplateUtil.lGet("userList2",0,-1);
+            Object listUsers= redisTemplateUtil.get("userList2");
             System.out.println(listUsers);
-            return "bbb";
-
+            return listUsers;
         }catch (Exception e){
-            return "aaa";
+            return null;
         }
     }
 }
