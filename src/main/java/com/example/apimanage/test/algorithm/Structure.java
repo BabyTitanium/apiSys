@@ -5,6 +5,13 @@ import com.example.apimanage.domain.dto.User;
 import com.sun.org.apache.bcel.internal.generic.LUSHR;
 import io.swagger.models.auth.In;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -32,14 +39,12 @@ public class Structure {
         public void run() {
             String str=hashtable.get("1");
             System.out.println(str);
-
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
-
+    public static void main(String[] args) throws InterruptedException, IOException {
        Fan<String> stringFan=new Fan<>();
-       stringFan.setName("刘玲玲");
+       stringFan.setName("刘");
         List<String> list1=new ArrayList<>();
         list1.add("111");
         list1.add("222");
@@ -49,18 +54,12 @@ public class Structure {
         list2.forEach(l-> System.out.println(l));
         LocalDateTime localDateTime=LocalDateTime.now();
         System.out.println(localDateTime);
-//        System.out.println(getName());
-        StringBuilder stringBuilder=new StringBuilder("1223");
-        StringBuffer stringBuffer=new StringBuffer("3333");
-        String ssa=":ssa";
-        Object o;
     }
     public  String getName(){
        String s=null;
        return Optional.ofNullable(s)
                .map(name->s)
                .orElse("呜呜呜");
-
     }
     public  String getName(String a){
         return a;
